@@ -1,5 +1,6 @@
 package com.alexandremathonneau.cardgame.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Joueur {
@@ -21,28 +22,19 @@ public class Joueur {
 	}
 	
 	private Nom nom;
-	private CartesEnMain main;
-	private List<Pli> plis;
+	private List<Carte> cartesEnMain;
 	
 	public Joueur(Nom nom) {
 		this.nom = nom;
-		main = new CartesEnMain();
+		cartesEnMain = new ArrayList<Carte>();
 	}
 	
 	public void ajouterCarteALaMain(Carte carte) {
-		main.ajouterCarte(carte);
+		cartesEnMain.add(carte);
 	}
 	
-	public Carte retirerCarteDeLaMain() {
-		return main.retirerCarte();
-	}
-	
-	public Carte getCarte(int index) {
-		return main.getCarte(index);
-	}
-
-	public void ajouterPli(Pli pli) {
-		plis.add(pli);
+	public Carte jouerCarte(int index) {
+		return cartesEnMain.remove(index);
 	}
 
 	@Override

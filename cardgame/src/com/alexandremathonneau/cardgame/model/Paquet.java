@@ -16,8 +16,6 @@ public class Paquet {
 				System.out.println(rang+" de "+couleur);
 			}
 		}
-
-		battre();
 	}
 
 	/**

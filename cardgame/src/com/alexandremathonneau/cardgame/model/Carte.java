@@ -1,10 +1,12 @@
 package com.alexandremathonneau.cardgame.model;
 
+import java.util.Objects;
+
 /**
- * 
+ *
  *
  */
-public class Carte {
+public class Carte implements Comparable {
 	
     static public final String[] NOMS_COULEURS = {"Coeur", "Carreau", "Pique", "Trefle"};
 
@@ -48,5 +50,23 @@ public class Carte {
 	@Override
 	public String toString() {
 		return rang + " de " + couleur;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return rang.valeurCarte() - ((Carte) o).rang.valeurCarte();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Carte carte = (Carte) o;
+		return rang == carte.rang;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(rang);
 	}
 }
