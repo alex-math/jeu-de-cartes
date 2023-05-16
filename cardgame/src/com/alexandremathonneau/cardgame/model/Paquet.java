@@ -9,11 +9,11 @@ public class Paquet {
 	private List<Carte> cartes;
 	
 	public Paquet() {
-		cartes = new ArrayList<Carte>();
-		for(RangCarte rang : RangCarte.values()) {
-			for(CouleurCarte couleur : CouleurCarte.values()) {
+		cartes = new ArrayList<>();
+		for(CouleurCarte couleur : CouleurCarte.values()) {
+			for(RangCarte rang : RangCarte.values()) {
 				cartes.add(new Carte(couleur, rang));
-				System.out.println(rang+" de "+couleur);
+				System.out.println(rang.getNom()+" de "+couleur.valeurCouleur());
 			}
 		}
 	}

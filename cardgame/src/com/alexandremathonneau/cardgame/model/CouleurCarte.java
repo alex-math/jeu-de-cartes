@@ -6,9 +6,9 @@ public enum CouleurCarte {
 	PIQUE 	("pique"),
 	TREFLE 	("trèfle");
 	
-	String couleur;
+	final String couleur;
 	
-	private CouleurCarte(String valeurCouleur) {
+	CouleurCarte(String valeurCouleur) {
 		couleur = valeurCouleur;
 	}
 	

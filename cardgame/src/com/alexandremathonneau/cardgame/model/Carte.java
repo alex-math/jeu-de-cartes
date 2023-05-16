@@ -1,7 +1,5 @@
 package com.alexandremathonneau.cardgame.model;
 
-import java.util.Objects;
-
 /**
  *
  *
@@ -54,19 +52,6 @@ public class Carte implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		return rang.valeurCarte() - ((Carte) o).rang.valeurCarte();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Carte carte = (Carte) o;
-		return rang == carte.rang;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(rang);
+		return rang.getRang() - ((Carte) o).rang.getRang();
 	}
 }
