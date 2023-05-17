@@ -115,24 +115,25 @@ public class GameController {
 	 */
 	private void calculerGagnantDuPli() {
 
+		// Tri décroissant du pli
 		List<Map.Entry<Joueur, Carte> > sortedPli = new ArrayList<>(pli.entrySet());
 		Collections.sort(sortedPli, Comparator.comparing(Map.Entry::getValue));
 
-		for (Map.Entry<Joueur, Carte> l : sortedPli) {
-			System.out.println("Key ->"
-					+ " " + l.getKey()
-					+ ": Value ->"
-					+ l.getValue());
-		}
-		List<Joueur> gagnants = new ArrayList<>();
+//		for (Map.Entry<Joueur, Carte> l : sortedPli) {
+//			System.out.println("Key ->"
+//					+ " " + l.getKey()
+//					+ ": Value ->"
+//					+ l.getValue());
+//		}
 
-		gagnants = pli.entrySet().stream()
-				.filter(map -> sortedPli.get(0).getValue().equals(map.getValue()))
+		// Liste des joueurs ayant une carte de même valeur, de même rang
+		List<Joueur> gagnants = pli.entrySet().stream()
+				.filter(map -> sortedPli.get(0).getValue().getRang().equals(map.getValue().getRang()))
 				.map(map -> map.getKey())
 				.collect(Collectors.toList());
 
 		Random r = new Random();
-		gagnantPli = gagnants.get(r.nextInt(gagnants.size()));
+		gagnantPli = gagnants.get(r.nextInt(0, gagnants.size()));
 	}
 
 }
