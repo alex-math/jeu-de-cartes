@@ -13,7 +13,7 @@ public class Paquet {
 		for(CouleurCarte couleur : CouleurCarte.values()) {
 			for(RangCarte rang : RangCarte.values()) {
 				cartes.add(new Carte(couleur, rang));
-				System.out.println(rang.getNom()+" de "+couleur.valeurCouleur());
+//				System.out.println(rang.getNom()+" de "+couleur.valeurCouleur());
 			}
 		}
 	}
@@ -32,5 +32,4 @@ public class Paquet {
 	public List<Carte> getCartes() {
 		return cartes;
 	}
-	
 }

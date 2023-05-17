@@ -23,10 +23,12 @@ public class Joueur {
 	
 	private Nom nom;
 	private List<Carte> cartesEnMain;
+	private List<Carte> cartesGagnees;
 	
 	public Joueur(Nom nom) {
 		this.nom = nom;
 		cartesEnMain = new ArrayList<Carte>();
+		cartesGagnees = new ArrayList<Carte>();
 	}
 	
 	public void ajouterCarteALaMain(Carte carte) {
@@ -37,8 +39,12 @@ public class Joueur {
 		return cartesEnMain.remove(index);
 	}
 
+	public void ramasserCarte(Carte carte) {
+		cartesGagnees.add(carte);
+	}
+
 	@Override
 	public String toString() {
-		return "Joueur{" + nom + '}';
+		return "Joueur {" + nom + '}';
 	}
 }

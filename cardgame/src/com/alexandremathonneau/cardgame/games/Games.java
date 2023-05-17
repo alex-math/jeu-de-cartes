@@ -6,7 +6,7 @@ import com.alexandremathonneau.cardgame.view.View;
 
 public class Games {
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         GameController gc = new GameController(new Paquet(), new View());
         gc.run();
     }
