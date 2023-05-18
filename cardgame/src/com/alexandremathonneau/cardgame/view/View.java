@@ -24,11 +24,11 @@ public class View {
         for (Map.Entry<String, String> entry : pliAAfficher.entrySet()) {
             System.out.printf(format, entry.getKey(), "=> " + entry.getValue());
         }
-        System.out.println();
     }
 
     public void afficherGagnantPli(String nomGagnantPli) {
-        System.out.println(nomGagnantPli + " gagne le pli");
+        System.out.println("=> " + nomGagnantPli + " gagne le pli");
+        System.out.println();
     }
 
     public void afficherGagnantPartie(String nomGagnantPartie) {
