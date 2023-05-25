@@ -3,6 +3,7 @@ package com.alexandremathonneau.cardgame.controller;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.alexandremathonneau.cardgame.games.GameEvaluator;
 import com.alexandremathonneau.cardgame.model.Carte;
 import com.alexandremathonneau.cardgame.model.Paquet;
 import com.alexandremathonneau.cardgame.model.Joueur;
@@ -18,14 +19,17 @@ public class GameController {
 	Paquet paquet;
 	List<Joueur> joueurs;
 	Joueur gagnantPli;
-	LinkedHashMap<Joueur, Carte> pli = new LinkedHashMap<>();
+	Map<Joueur, Carte> pli = new HashMap<>();
 	View view;
 	
 	EtatDuJeu etatDuJeu;
+
+	GameEvaluator gameEvaluator;
 	
-	public GameController(Paquet paquet, View view) {
+	public GameController(Paquet paquet, View view, GameEvaluator gameEvaluator) {
 		this.paquet = paquet;
 		this.view = view;
+		this.gameEvaluator = gameEvaluator;
 		this.joueurs = new ArrayList<Joueur>();
 		this.etatDuJeu = EtatDuJeu.DebutDuJeu;
 		view.setController(this);
@@ -96,7 +100,7 @@ public class GameController {
 		}
 		view.afficherPli(pliAAfficher);
 
-		calculerGagnantDuPli();
+		gagnantPli = gameEvaluator.calculerGagnantDuPli(pli);
 		view.afficherGagnantPli(gagnantPli.toString());
 
 		ajouterPliAuGagnant();
@@ -106,34 +110,6 @@ public class GameController {
 
 	private void ajouterPliAuGagnant() {
 		pli.forEach((k,v)->gagnantPli.ramasserCarte(v));
-	}
-
-	/**
-	 * Détermine la carte la plus forte du pli, et par conséquent désigne le gagnant du pli.<br>
-	 * En cas d'égalité de rang entre plusieurs cartes du pli, nous laissons le hasard déterminer le gagnant du pli
-	 *
-	 */
-	private void calculerGagnantDuPli() {
-
-		// Tri décroissant du pli
-		List<Map.Entry<Joueur, Carte> > sortedPli = new ArrayList<>(pli.entrySet());
-		Collections.sort(sortedPli, Comparator.comparing(Map.Entry::getValue));
-
-//		for (Map.Entry<Joueur, Carte> l : sortedPli) {
-//			System.out.println("Key ->"
-//					+ " " + l.getKey()
-//					+ ": Value ->"
-//					+ l.getValue());
-//		}
-
-		// Liste des joueurs ayant une carte de même valeur, de même rang
-		List<Joueur> gagnants = pli.entrySet().stream()
-				.filter(map -> sortedPli.get(0).getValue().getRang().equals(map.getValue().getRang()))
-				.map(map -> map.getKey())
-				.collect(Collectors.toList());
-
-		Random r = new Random();
-		gagnantPli = gagnants.get(r.nextInt(0, gagnants.size()));
 	}
 
 }
