@@ -10,7 +10,7 @@ import com.alexandremathonneau.cardgame.vue.VueDuJeu;
 
 
 public class GameController {
-	
+
 	enum EtatDuJeu {
 		DebutDuJeu, PretAServir, CartesDistribuees, PartieEnCours, PartieTerminee
 	}
@@ -29,7 +29,7 @@ public class GameController {
 		this.paquet = paquet;
 		this.vueDuJeu = vueDuJeu;
 		this.gameEvaluator = gameEvaluator;
-		this.joueurs = new ArrayList<Joueur>();
+		this.joueurs = new ArrayList<>();
 		this.etatDuJeu = EtatDuJeu.DebutDuJeu;
 		vueDuJeu.setController(this);
 	}
@@ -56,14 +56,13 @@ public class GameController {
 	}
 
 	private void verifCartesEnMains() {
+		etatDuJeu = EtatDuJeu.CartesDistribuees;
 		for(Joueur joueur : joueurs) {
 			if(joueur.getCartesEnMain().isEmpty()) {
 				etatDuJeu = EtatDuJeu.PartieTerminee;
-				this.run();
+				break;
 			}
 		}
-		etatDuJeu = EtatDuJeu.CartesDistribuees;
-
 		this.run();
 	}
 
@@ -130,4 +129,16 @@ public class GameController {
 		pli.forEach((k,v)->gagnantPli.ramasserCarte(v));
 	}
 
+	public void exitGame() {
+		System.out.println("exit...");
+		System.exit(0);
+	}
+
+	public void recommencerLaPartie() {
+		joueurs.forEach(joueur -> paquet.remettreCarteDansLePaquet(joueur.getCartesGagnees()));
+
+		etatDuJeu = EtatDuJeu.DebutDuJeu;
+
+		this.run();
+	}
 }

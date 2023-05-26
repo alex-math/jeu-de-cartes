@@ -47,6 +47,10 @@ public class Joueur {
 		return cartesEnMain;
 	}
 
+	public List<Carte> getCartesGagnees() {
+		return cartesGagnees;
+	}
+
 	@Override
 	public String toString() {
 		return "Joueur {" + nom + '}';

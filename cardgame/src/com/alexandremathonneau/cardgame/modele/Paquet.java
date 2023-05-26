@@ -29,6 +29,10 @@ public class Paquet {
 		return cartes.remove(0);
 	}
 
+	public void remettreCarteDansLePaquet(List<Carte> cartes) {
+		cartes.forEach(carte -> this.cartes.add(carte));
+	}
+
 	public List<Carte> getCartes() {
 		return cartes;
 	}

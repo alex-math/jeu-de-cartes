@@ -8,8 +8,9 @@ import java.util.Scanner;
 
 public class VueLigneDeCommande implements VueDuJeu {
 
-    GameController controller;
+
     Scanner keyboard = new Scanner(System.in);
+    GameController controller;
 
     @Override
     public void afficherToutesLesCartes(List<String> listeCartes) {
@@ -44,7 +45,13 @@ public class VueLigneDeCommande implements VueDuJeu {
 
     @Override
     public void demandeNouvellePartie() {
-        System.out.println("exit...");
-        System.exit(0);
+        System.out.println("Souhaitez-vous recommencer une partie ? o/n (\"o\" pour recommencer) :");
+        String reponse = keyboard.nextLine();
+        if (reponse.contains("o")) {
+            this.controller.recommencerLaPartie();
+        } else {
+            this.controller.exitGame();
+        }
+
     }
 }

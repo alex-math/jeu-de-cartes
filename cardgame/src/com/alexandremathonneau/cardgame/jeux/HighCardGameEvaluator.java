@@ -19,12 +19,12 @@ public class HighCardGameEvaluator implements GameEvaluator{
         List<Map.Entry<Joueur, Carte> > sortedPli = new ArrayList<>(pli.entrySet());
         Collections.sort(sortedPli, Comparator.comparing(Map.Entry::getValue));
 
-		for (Map.Entry<Joueur, Carte> l : sortedPli) {
-			System.out.println("Key ->"
-					+ " " + l.getKey()
-					+ ": Value ->"
-					+ l.getValue());
-		}
+//		for (Map.Entry<Joueur, Carte> l : sortedPli) {
+//			System.out.println("Key ->"
+//					+ " " + l.getKey()
+//					+ ": Value ->"
+//					+ l.getValue());
+//		}
 
         // Liste des joueurs ayant une carte de même valeur, de même rang
         List<Joueur> gagnants = pli.entrySet().stream()
