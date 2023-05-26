@@ -35,4 +35,21 @@ public class HighCardGameEvaluator implements GameEvaluator{
         Random r = new Random();
         return gagnants.get(r.nextInt(0, gagnants.size()));
     }
+
+    /**
+     * Le gagnant est le joueur qui a remporté le plus de plis<br>
+     * En cas d'égalité entre plusieurs joueurs, nous laissons le hasard déterminer le gagnant de la partie
+     * @param joueurs
+     * @return
+     */
+    @Override
+    public Joueur calculerGagnantDeLaPartie(List<Joueur> joueurs) {
+        // Liste des joueurs ayant remporté le même nombre de carte durant la partie
+        List<Joueur> gagnants = joueurs.stream()
+                .filter(list -> joueurs.get(0).getCartesGagnees().equals(list.getCartesGagnees()))
+                .collect(Collectors.toList());
+
+        Random r = new Random();
+        return gagnants.get(r.nextInt(0, gagnants.size()));
+    }
 }

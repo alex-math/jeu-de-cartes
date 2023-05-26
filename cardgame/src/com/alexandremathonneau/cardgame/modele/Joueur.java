@@ -3,7 +3,8 @@ package com.alexandremathonneau.cardgame.modele;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Joueur {
+public class Joueur implements Comparable {
+
 	public enum Nom {
 		UN 		(1),
 		DEUX 	(2),
@@ -55,4 +56,10 @@ public class Joueur {
 	public String toString() {
 		return "Joueur {" + nom + '}';
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		return ((List<Carte>) o).size() - cartesGagnees.size();
+	}
+
 }

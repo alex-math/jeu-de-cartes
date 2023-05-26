@@ -18,6 +18,7 @@ public class GameController {
 	Paquet paquet;
 	List<Joueur> joueurs;
 	Joueur gagnantPli;
+	Joueur gagnantPartie;
 	Map<Joueur, Carte> pli = new HashMap<>();
 	VueDuJeu vueDuJeu;
 	
@@ -50,6 +51,8 @@ public class GameController {
 				verifCartesEnMains();
 				break;
 			case PartieTerminee:
+				gagnantPartie = gameEvaluator.calculerGagnantDeLaPartie(joueurs);
+				vueDuJeu.afficherGagnantPartie(gagnantPartie.toString());
 				vueDuJeu.demandeNouvellePartie();
 				break;
 		}
@@ -134,6 +137,9 @@ public class GameController {
 		System.exit(0);
 	}
 
+	/**
+	 * Pour recommencer la partie, nous remettons les cartes gagnées (par les joueurs dans la partie précédente) dans le paquet
+	 */
 	public void recommencerLaPartie() {
 		joueurs.forEach(joueur -> paquet.remettreCarteDansLePaquet(joueur.getCartesGagnees()));
 

@@ -29,13 +29,14 @@ public class VueLigneDeCommande implements VueDuJeu {
 
     @Override
     public void afficherGagnantPli(String nomGagnantPli) {
-        System.out.println("=> " + nomGagnantPli + " gagne le pli");
+        System.out.println("====> " + nomGagnantPli + " gagne le pli <====");
         System.out.println();
     }
 
     @Override
     public void afficherGagnantPartie(String nomGagnantPartie) {
         System.out.println(nomGagnantPartie + " gagne la partie");
+        System.out.println();
     }
 
     @Override
