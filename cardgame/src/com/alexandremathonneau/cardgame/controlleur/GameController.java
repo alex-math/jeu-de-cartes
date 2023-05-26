@@ -57,9 +57,9 @@ public class GameController {
 
 	private void verifCartesEnMains() {
 		for(Joueur joueur : joueurs) {
-			if(joueur.getCartesEnMain().size() == 0) {
+			if(joueur.getCartesEnMain().isEmpty()) {
 				etatDuJeu = EtatDuJeu.PartieTerminee;
-				break;
+				this.run();
 			}
 		}
 		etatDuJeu = EtatDuJeu.CartesDistribuees;
