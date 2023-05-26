@@ -1,38 +1,37 @@
-package com.alexandremathonneau.cardgame.controller;
+package com.alexandremathonneau.cardgame.controlleur;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import com.alexandremathonneau.cardgame.games.GameEvaluator;
-import com.alexandremathonneau.cardgame.model.Carte;
-import com.alexandremathonneau.cardgame.model.Paquet;
-import com.alexandremathonneau.cardgame.model.Joueur;
-import com.alexandremathonneau.cardgame.view.View;
+import com.alexandremathonneau.cardgame.jeux.GameEvaluator;
+import com.alexandremathonneau.cardgame.modele.Carte;
+import com.alexandremathonneau.cardgame.modele.Paquet;
+import com.alexandremathonneau.cardgame.modele.Joueur;
+import com.alexandremathonneau.cardgame.vue.VueDuJeu;
 
 
 public class GameController {
 	
 	enum EtatDuJeu {
-		DebutDuJeu, PretAServir, CartesDistribuees, PartieTerminee
+		DebutDuJeu, PretAServir, CartesDistribuees, PartieEnCours, PartieTerminee
 	}
 	
 	Paquet paquet;
 	List<Joueur> joueurs;
 	Joueur gagnantPli;
 	Map<Joueur, Carte> pli = new HashMap<>();
-	View view;
+	VueDuJeu vueDuJeu;
 	
 	EtatDuJeu etatDuJeu;
 
 	GameEvaluator gameEvaluator;
 	
-	public GameController(Paquet paquet, View view, GameEvaluator gameEvaluator) {
+	public GameController(Paquet paquet, VueDuJeu vueDuJeu, GameEvaluator gameEvaluator) {
 		this.paquet = paquet;
-		this.view = view;
+		this.vueDuJeu = vueDuJeu;
 		this.gameEvaluator = gameEvaluator;
 		this.joueurs = new ArrayList<Joueur>();
 		this.etatDuJeu = EtatDuJeu.DebutDuJeu;
-		view.setController(this);
+		vueDuJeu.setController(this);
 	}
 	
 	public void run() {
@@ -47,12 +46,27 @@ public class GameController {
 			case CartesDistribuees:
 				faireUnPli();
 				break;
+			case PartieEnCours:
+				verifCartesEnMains();
+				break;
 			case PartieTerminee:
-				view.demandeNouvellePartie();
+				vueDuJeu.demandeNouvellePartie();
 				break;
 		}
 	}
-	
+
+	private void verifCartesEnMains() {
+		for(Joueur joueur : joueurs) {
+			if(joueur.getCartesEnMain().size() == 0) {
+				etatDuJeu = EtatDuJeu.PartieTerminee;
+				break;
+			}
+		}
+		etatDuJeu = EtatDuJeu.CartesDistribuees;
+
+		this.run();
+	}
+
 	public void creationDesJoueurs() {
 		for (Joueur.Nom nom : Joueur.Nom.values()) {
 			joueurs.add(new Joueur(nom));
@@ -71,7 +85,7 @@ public class GameController {
 			for (Carte carte : paquet.getCartes()) {
 				nomsCartes.add(carte.toString());
 			}
-			view.afficherToutesLesCartes(nomsCartes);
+			vueDuJeu.afficherToutesLesCartes(nomsCartes);
 			paquet.battre();
 
 			// Tant qu'il reste assez de cartes dans le paquet pour servir tous les joueurs
@@ -94,16 +108,20 @@ public class GameController {
 		pli.clear();
 		LinkedHashMap<String, String> pliAAfficher = new LinkedHashMap<>();
 		for (Joueur joueur : joueurs) {
-			Carte carte = joueur.jouerCarte(0);
-			pli.put(joueur, carte);
-			pliAAfficher.put(joueur.toString(), carte.toString());
+			if (!joueur.getCartesEnMain().isEmpty()) {
+				Carte carte = joueur.jouerCarte(0);
+				pli.put(joueur, carte);
+				pliAAfficher.put(joueur.toString(), carte.toString());
+			}
 		}
-		view.afficherPli(pliAAfficher);
+		vueDuJeu.afficherPli(pliAAfficher);
 
 		gagnantPli = gameEvaluator.calculerGagnantDuPli(pli);
-		view.afficherGagnantPli(gagnantPli.toString());
+		vueDuJeu.afficherGagnantPli(gagnantPli.toString());
 
 		ajouterPliAuGagnant();
+
+		etatDuJeu = EtatDuJeu.PartieEnCours;
 
 		this.run();
 	}

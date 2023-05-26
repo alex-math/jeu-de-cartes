@@ -1,10 +1,9 @@
-package com.alexandremathonneau.cardgame.games;
+package com.alexandremathonneau.cardgame.jeux;
 
-import com.alexandremathonneau.cardgame.model.Carte;
-import com.alexandremathonneau.cardgame.model.Joueur;
+import com.alexandremathonneau.cardgame.modele.Carte;
+import com.alexandremathonneau.cardgame.modele.Joueur;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public interface GameEvaluator {
 

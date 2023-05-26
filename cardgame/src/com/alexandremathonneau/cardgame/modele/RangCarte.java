@@ -1,7 +1,4 @@
-package com.alexandremathonneau.cardgame.model;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.alexandremathonneau.cardgame.modele;
 
 public enum RangCarte {
 	DEUX 	("2", 2),

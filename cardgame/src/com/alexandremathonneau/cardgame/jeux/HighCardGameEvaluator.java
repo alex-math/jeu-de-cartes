@@ -1,14 +1,14 @@
-package com.alexandremathonneau.cardgame.games;
+package com.alexandremathonneau.cardgame.jeux;
 
-import com.alexandremathonneau.cardgame.model.Carte;
-import com.alexandremathonneau.cardgame.model.Joueur;
+import com.alexandremathonneau.cardgame.modele.Carte;
+import com.alexandremathonneau.cardgame.modele.Joueur;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class HighCardGameEvaluator implements GameEvaluator{
     /**
-     * La carte la plus forte du pli est la carte la plus élevée, conformément à l'ordre établi dans {@link com.alexandremathonneau.cardgame.model.RangCarte RangCarte}.<br>
+     * La carte la plus forte du pli est la carte la plus élevée, conformément à l'ordre établi dans {@link com.alexandremathonneau.cardgame.modele.RangCarte RangCarte}.<br>
      * En cas d'égalité de rang entre plusieurs cartes du pli, nous laissons le hasard déterminer le gagnant du pli
      * @param pli
      * @return
@@ -19,12 +19,12 @@ public class HighCardGameEvaluator implements GameEvaluator{
         List<Map.Entry<Joueur, Carte> > sortedPli = new ArrayList<>(pli.entrySet());
         Collections.sort(sortedPli, Comparator.comparing(Map.Entry::getValue));
 
-//		for (Map.Entry<Joueur, Carte> l : sortedPli) {
-//			System.out.println("Key ->"
-//					+ " " + l.getKey()
-//					+ ": Value ->"
-//					+ l.getValue());
-//		}
+		for (Map.Entry<Joueur, Carte> l : sortedPli) {
+			System.out.println("Key ->"
+					+ " " + l.getKey()
+					+ ": Value ->"
+					+ l.getValue());
+		}
 
         // Liste des joueurs ayant une carte de même valeur, de même rang
         List<Joueur> gagnants = pli.entrySet().stream()

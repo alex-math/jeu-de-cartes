@@ -1,22 +1,22 @@
-package com.alexandremathonneau.cardgame.view;
+package com.alexandremathonneau.cardgame.vue;
 
-import com.alexandremathonneau.cardgame.controller.GameController;
+import com.alexandremathonneau.cardgame.controlleur.GameController;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.lang.System.exit;
-
-public class View {
+public class VueLigneDeCommande implements VueDuJeu {
 
     GameController controller;
     Scanner keyboard = new Scanner(System.in);
 
+    @Override
     public void afficherToutesLesCartes(List<String> listeCartes) {
         listeCartes.forEach(System.out::println);
     }
 
+    @Override
     public void afficherPli(Map<String, String> pliAAfficher) {
         System.out.println("Appuyer sur Entree pour jouer un pli");
         keyboard.nextLine();
@@ -26,19 +26,23 @@ public class View {
         }
     }
 
+    @Override
     public void afficherGagnantPli(String nomGagnantPli) {
         System.out.println("=> " + nomGagnantPli + " gagne le pli");
         System.out.println();
     }
 
+    @Override
     public void afficherGagnantPartie(String nomGagnantPartie) {
         System.out.println(nomGagnantPartie + " gagne la partie");
     }
 
+    @Override
     public void setController(GameController gc) {
         this.controller = gc;
     }
 
+    @Override
     public void demandeNouvellePartie() {
         System.out.println("exit...");
         System.exit(0);

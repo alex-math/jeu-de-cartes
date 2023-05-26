@@ -1,4 +1,4 @@
-package com.alexandremathonneau.cardgame.model;
+package com.alexandremathonneau.cardgame.modele;
 
 import java.util.ArrayList;
 import java.util.Collections;

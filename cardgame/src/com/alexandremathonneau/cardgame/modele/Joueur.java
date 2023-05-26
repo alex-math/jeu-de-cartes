@@ -1,4 +1,4 @@
-package com.alexandremathonneau.cardgame.model;
+package com.alexandremathonneau.cardgame.modele;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,10 @@ public class Joueur {
 
 	public void ramasserCarte(Carte carte) {
 		cartesGagnees.add(carte);
+	}
+
+	public List<Carte> getCartesEnMain() {
+		return cartesEnMain;
 	}
 
 	@Override
