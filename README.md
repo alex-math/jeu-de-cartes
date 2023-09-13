@@ -1,6 +1,6 @@
 <h1 align="center">Jeu de cartes</h1>
 
-**Test technique** à réaliser pour [NatSystem](https://www.natsystem.fr/).
+**Test technique**
 
 ## Objectifs de l’évaluation
 
