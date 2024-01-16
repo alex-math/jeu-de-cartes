@@ -1,10 +1,8 @@
 <h1 align="center">Jeu de cartes</h1>
 
-**Test technique**
+## Objectifs
 
-## Objectifs de l’évaluation
-
-Évaluation de la capacité du candidat à produire **un code de qualité professionnelle**.
+Produire **un code de qualité professionnelle**.
 
 ### Test :
 Réaliser un exercice simple de programmation en respectant le cahier des charges et faisant
@@ -13,7 +11,7 @@ Fournissez tous les éléments :
 - Le langage que vous avez retenu et la raison du choix de ce langage
 - Le code source
 - Le code binaire produit
-- Le fichier texte de résultat de test (ou hard copie d’écran)
+- Le fichier texte de résultat de test
 
 ### Sujet :
 Déclarer un tableau de 52 cartes avec pour chacune une valeur et une couleur.
